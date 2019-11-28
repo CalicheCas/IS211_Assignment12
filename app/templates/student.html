@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Students</title>
+    </head>
+    <body>
+        {% extends "base.html" %}
+
+        {% block content %}
+            <h1>Students</h1>
+
+            <div>
+            <table id="all">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Year</th>
+                </tr>
+                {% for student in students %}
+                <tr>
+                    <td> {{student.id}} </td>
+                    <td> {{student.first_name}} </td>
+                    <td> {{student.last_name}} </td>
+                    <td> {{student.year_id}} </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div><br>
+            <form action="/student" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.firstname.label }}<br>
+                    {{ form.firstname(size=50) }}<br>
+                    {% for error in form.firstname.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.lastname.label }}<br>
+                    {{ form.lastname(size=50) }}<br>
+                    {% for error in form.lastname.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.year.label }}<br>
+                    {{ form.year(size=4) }}<br>
+                    {% for error in form.year.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+<!--                <p>-->
+<!--                    {{ form.year.label }}<br>-->
+<!--                    <select name="year_desc">-->
+<!--                        {% for year in years %}-->
+<!--                        <option value= "{{year}}" SELECTED>{{ year }}</option>"-->
+<!--                        {% endfor %}-->
+<!--                    </select>-->
+<!--                </p>-->
+                <p>{{ form.submit() }}</p>
+            </form>
+        {% endblock %}
+    </body>
+</html>

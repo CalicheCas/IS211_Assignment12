@@ -16,6 +16,8 @@ To run the application follow the steps below:
     $ export FLASK_APP=studenttracker.py
     $ flask run
             
+#### Useful tips
+Set your FLASK_DEBUG=1 so the flask app can run in debug mode and be able to hot reload instead of having to stop and start the flask app
             
 ### Database
 
@@ -30,6 +32,6 @@ initialize the database.
 ## Database migrations
 
 > flask db migrate -m "users table"
-
+> flask db upgrade
 -m option is optional, it adds a short descriptive text to
 the migration

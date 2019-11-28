@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Year</title>
+</head>
+    <body>
+        {% extends "base.html" %}
+
+        {% block content %}
+    <h1>School Year</h1>
+    <form action="/year" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.desc.label }}<br>
+            {{ form.desc(size=20) }}<br>
+            {% for error in form.desc.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+        <div>
+            <table id="years">
+                <tr>
+                    <th>ID</th>
+                    <th>Year</th>
+                </tr>
+                {% for year in years %}
+                <tr>
+                    <td>{{ year.id }}</td>
+                    <td>{{ year.desc }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endblock %}
+    </body>
+</html>

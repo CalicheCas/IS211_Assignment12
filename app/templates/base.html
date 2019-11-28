@@ -16,6 +16,11 @@
             {% else %}
             <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
+            <a href="{{ url_for('student') }}">Students</a>
+            <a href="{{ url_for('year') }}">Year</a>
+            <a href="{{ url_for('classes') }}">Class</a>
+            <a href="{{ url_for('quiz') }}">Quiz</a>
+            <a href="{{ url_for('results') }}">Result</a>
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}

@@ -1,8 +1,8 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
+from wtforms.fields.html5 import DateField
 
 
 class LoginForm(FlaskForm):
@@ -29,3 +29,29 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
+class StudentForm(FlaskForm):
+    firstname = StringField('First Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    year = StringField('Year', validators=[DataRequired()])
+    submit = SubmitField('Add Student')
+
+
+class YearForm(FlaskForm):
+    desc = StringField("School Year", validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+class ClassForm(FlaskForm):
+    name = StringField("Class Name", validators=[DataRequired()])
+    subject = StringField("Subject", validators=[DataRequired()])
+    student_id = StringField("Student ID", validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+class QuizForm(FlaskForm):
+    created_at = DateField('Date', format='%Y-%m-%d')
+    grade = StringField("Grade", validators=[DataRequired()])
+    class_id = StringField("Class ID", validators=[DataRequired()])
+    submit = SubmitField('Submit')

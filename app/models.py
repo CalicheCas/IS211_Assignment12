@@ -1,5 +1,4 @@
 from app import db
-from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
@@ -56,9 +55,9 @@ class Class(db.Model):
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    grade = db.Column(db.DECIMAL, nullable=False)
+    created_at = db.Column(db.Date, index=True)
+    grade = db.Column(db.String(4), nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey('class.id'))
 
     def __repr__(self):
-        return '<Quiz: TimeStamp {} - Grade {} - ClassId {}>'.format(self.timestamp, self.grade, self.class_id)
+        return '<Quiz: TimeStamp {} - Grade {} - ClassId {}>'.format(self.created_at, self.grade, self.class_id)

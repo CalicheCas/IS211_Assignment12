@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizzes</title>
+</head>
+<body>
+        {% extends "base.html" %}
+
+        {% block content %}
+            <h1>Quizzes</h1>
+
+            <div>
+            <table id="quizzes">
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Grade</th>
+                    <th>Class ID</th>
+                </tr>
+                {% for quiz in quizzes %}
+                <tr>
+                    <td> {{quiz.id}} </td>
+                    <td> {{quiz.created_at}} </td>
+                    <td> {{quiz.grade}} </td>
+                    <td> {{quiz.class_id}} </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div><br>
+            <form action="/quiz" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.created_at.label }}<br>
+                    {{ form.created_at(class='date') }}
+                    {{ form.hidden_tag() }}
+                </p>
+                <p>
+                    {{ form.grade.label }}<br>
+                    {{ form.grade(size=20) }}<br>
+                    {% for error in form.grade.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.class_id.label }}<br>
+                    {{ form.class_id(size=4) }}<br>
+                    {% for error in form.class_id.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        {% endblock %}
+    </body>
+</html>
